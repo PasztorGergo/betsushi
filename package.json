@@ -8,6 +8,8 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "@next/font": "^13.4.7",
+    "framer-motion": "^10.12.18",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
