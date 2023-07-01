@@ -1,6 +1,12 @@
 "use client";
 
 import React from "react";
+import localFont from "@next/font/local";
+
+const jansina = localFont({
+  src: "../JANSINA.ttf",
+  variable: "--font-jansina",
+});
 
 export const Title = ({
   level,
@@ -13,6 +19,6 @@ export const Title = ({
 }) => {
   return React.createElement(`h${level}`, {
     children,
-    className: className + " text-jansina",
+    className: `${className} ${jansina.className}`,
   });
 };

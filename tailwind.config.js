@@ -13,9 +13,6 @@ module.exports = {
         background: "#FDF9F2",
         selected: "#F8EBD3",
       },
-      fontFamily: {
-        jansina: ["var(--font-jansina)"],
-      },
     },
   },
   plugins: [],
