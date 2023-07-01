@@ -5,7 +5,7 @@ import "../styles/global.css";
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
-      <body className="px-16 ">
+      <body className="overflow-x-hidden">
         <Navbar />
         {children}
         <Footer />

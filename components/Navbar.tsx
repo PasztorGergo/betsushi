@@ -5,10 +5,15 @@ import { RiAncientPavilionLine } from "react-icons/ri";
 import Image from "next/image";
 import { Button } from "./Button";
 import Link from "next/link";
+import styles from "../styles";
 
 export const Navbar = () => {
   return (
-    <nav className="mt-4 w-full flex justify-between items-center">
+    <nav
+      className={
+        styles.padding + " mt-4 w-full flex justify-between items-center"
+      }
+    >
       <Link href="/">
         <Image
           alt="betsushi logo"
