@@ -6,6 +6,9 @@ const nextConfig = {
   env: {
     GOOGLE_API: process.env.GOOGLE_API,
   },
+  images: {
+    domains: ["thispersondoesnotexist.com"],
+  },
 };
 
 module.exports = nextConfig;
