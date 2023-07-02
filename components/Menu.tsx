@@ -58,7 +58,7 @@ export const Menu = () => {
             <Card className="aspect-square w-48 p-4 grid place-items-center h-48">
               <Image
                 src="/sushi-5.png"
-                alt=""
+                alt="Makis"
                 width={760}
                 height={780}
                 className="w-24"
@@ -72,7 +72,7 @@ export const Menu = () => {
             <Card className="aspect-square w-48 p-4 grid place-items-center h-48">
               <Image
                 src="/sushi-11.png"
-                alt=""
+                alt="Nigiris"
                 width={643}
                 height={479}
                 className="w-24"
@@ -86,7 +86,7 @@ export const Menu = () => {
             <Card className="aspect-square w-48 p-4 grid place-items-center h-48">
               <Image
                 src="/sushi-4.png"
-                alt=""
+                alt="Drinks"
                 width={627}
                 height={840}
                 className="w-24"
@@ -100,7 +100,7 @@ export const Menu = () => {
             <Card className="aspect-square w-48 p-4 grid place-items-center h-48">
               <Image
                 src="/sushi-7.png"
-                alt=""
+                alt="Starters"
                 width={80}
                 height={64}
                 className="w-24"
@@ -114,7 +114,7 @@ export const Menu = () => {
             <Card className="aspect-square w-48 p-4 grid place-items-center h-48">
               <Image
                 src="/sushi-10.png"
-                alt=""
+                alt="Soups"
                 width={405}
                 height={252}
                 className="w-24"
