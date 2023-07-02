@@ -1,6 +1,9 @@
 "use client";
 import { motion, useInView, useSpring } from "framer-motion";
 import React, { useEffect, useRef } from "react";
+import { Title } from "./Title";
+import styles from "../styles";
+import { Map } from "./Map";
 
 export const Location = () => {
   const ratings = useSpring(0, { damping: 10, stiffness: 40 });
@@ -62,6 +65,24 @@ export const Location = () => {
           <p className="text-sm font-bold uppercase text-secondary">
             Daily orders
           </p>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 grid-rows-1">
+        <div className="p-8 bg-primary col-start-1 flex flex-col items-center justify-center gap-4 text-center text-white aspect-square">
+          <Title className={styles.title} level={3}>
+            But where is the restaurant?
+          </Title>
+          <p className="font-bold">
+            X-chōme-X Noritakeshinmachi, Nishi Ward, Nagoya, Aichi 451-0051,
+            Japan
+          </p>
+          <p className="font-bold">
+            Don&apos;t forget to reserve a table through phone
+          </p>
+          <p className="font-bold">+81 52 XXX XXXX</p>
+        </div>
+        <div className="w-full h-full aspect-square col-start-2">
+          <Map />
         </div>
       </div>
     </section>
