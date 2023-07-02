@@ -9,3 +9,4 @@ export { Hero } from "./Hero";
 export { Menu } from "./Menu";
 export { About } from "./About";
 export { Location } from "./Location";
+export { Order } from "./Order";
