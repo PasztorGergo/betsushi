@@ -19,7 +19,7 @@ export const About = () => {
       <motion.div
         variants={staggerContainer()}
         whileInView="show"
-        initial={window.innerWidth > 768 ? "hidden" : "show"}
+        initial={window?.innerWidth > 768 ? "hidden" : "show"}
         viewport={{ once: false, amount: 0.25 }}
         className="relative grid grid-cols-1 md:grid-cols-2 w-full"
       >
