@@ -67,7 +67,7 @@ export const Location = () => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-2 grid-rows-1">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-1">
         <div className="p-8 bg-primary col-start-1 flex flex-col items-center justify-center gap-4 text-center text-white aspect-square">
           <Title className={styles.title} level={3}>
             But where is the restaurant?
@@ -81,7 +81,7 @@ export const Location = () => {
           </p>
           <p className="font-bold">+81 52 XXX XXXX</p>
         </div>
-        <div className="w-full h-full aspect-square col-start-2">
+        <div className="w-full h-full aspect-square col-start-1 md:col-start-2">
           <Map />
         </div>
       </div>

@@ -6,7 +6,7 @@ import { RatingCard } from "./RatingCard";
 export const Testimonials = () => {
   return (
     <section
-      className={`${styles.padding} flex flex-col items-center mt-64 justify-center gap-8`}
+      className={`${styles.padding} flex flex-col items-center mt-32 md:mt-64 justify-center gap-8`}
     >
       <Title level={2} className={`${styles.title} text-secondary`}>
         To prove our quality

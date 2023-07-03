@@ -6,7 +6,7 @@ import Image from "next/image";
 export const Footer = () => {
   return (
     <footer
-      className={`grid grid-cols-2 grid-rows-4 bg-secondary mt-64 pt-16 [clip-path:polygon(0_0,_100%_3rem,_100%_100%,_0%_100%)] ${styles.padding}`}
+      className={`grid text-center gap-8 md:gap-0 md:text-left place-items-center md:place-items-start grid-cols-1 md:grid-cols-2 pb-4 md:grid-rows-4 bg-secondary mt-64 pt-16 [clip-path:polygon(0_0,_100%_3rem,_100%_100%,_0%_100%)] ${styles.padding}`}
     >
       <Title
         level={2}
@@ -29,7 +29,7 @@ export const Footer = () => {
         alt="Betsushi logo"
         width={243}
         height={243}
-        className="row-start-1 row-span-full col-start-2 place-self-center"
+        className="md:row-start-1 md:row-span-full col-start-1 md:col-start-2 place-self-center"
       />
     </footer>
   );

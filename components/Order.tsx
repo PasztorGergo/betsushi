@@ -11,7 +11,7 @@ import Link from "next/link";
 export const Order = () => {
   return (
     <section
-      className={`${styles.padding} mt-64 flex flex-col items-center justify-center gap-8`}
+      className={`${styles.padding} mt-32 md:mt-64 flex flex-col items-center justify-center gap-8`}
     >
       <Title level={2} className={`${styles.title} text-secondary`}>
         Got hungry? Order now!

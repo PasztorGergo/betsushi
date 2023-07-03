@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export const About = () => {
   return (
-    <section className="w-full flex flex-col items-center mb-64">
+    <section className="w-full flex flex-col items-center mb-32 md:mb-64">
       <Title
         level={2}
         className={`text-secondary text-center mb-12 ${styles.title}`}
@@ -19,9 +19,9 @@ export const About = () => {
       <motion.div
         variants={staggerContainer()}
         whileInView="show"
-        initial="hidden"
+        initial={window.innerWidth > 768 ? "hidden" : "show"}
         viewport={{ once: false, amount: 0.25 }}
-        className="relative grid grid-cols-2 w-full"
+        className="relative grid grid-cols-1 md:grid-cols-2 w-full"
       >
         <motion.div
           variants={fadeIn("left", 12, 60)}
@@ -43,7 +43,7 @@ export const About = () => {
         </motion.div>
         <motion.div
           variants={fadeIn("right", 12, 60)}
-          className="text-right flex flex-col justify-center gap-8 aspect-square bg-primary text-white col-start-2 row-start-2 p-8"
+          className="text-right flex flex-col justify-center gap-8 aspect-square bg-primary text-white md:col-start-2 md:row-start-2 row-start-3 col-start-1 p-8"
         >
           <p className="text-xl">
             From the delicate artistry of nigiri sushi to the sizzle of
@@ -62,26 +62,26 @@ export const About = () => {
         </motion.div>
         <motion.div
           variants={fadeIn("down", 12, 60)}
-          className="col-strat-2 row-start-1 grid place-items-center w-full h-full"
+          className="md:col-strat-2 aspect-square md:row-start-1 row-start-2 grid place-items-center w-full h-full"
         >
           <Image
             src="/sushi-5.png"
             alt="Maki"
             width={762}
             height={780}
-            className="md:w-1/2"
+            className="w-1/2"
           />
         </motion.div>
         <motion.div
           variants={fadeIn("up", 12, 60)}
-          className="col-strat-1 row-start-2 grid place-items-center w-full h-full"
+          className="col-strat-1 aspect-square md:row-start-2 row-start-4 grid place-items-center w-full h-full"
         >
           <Image
             src="/sushi-4.png"
             alt="Sake"
             width={627}
             height={840}
-            className="md:w-1/2"
+            className="w-1/2"
           />
         </motion.div>
         <Image
@@ -89,7 +89,7 @@ export const About = () => {
           alt="Japanese Imperial Seal"
           width={206}
           height={206}
-          className="absolute m-auto inset-0"
+          className="absolute m-auto inset-0 md:block hidden"
         />
       </motion.div>
     </section>

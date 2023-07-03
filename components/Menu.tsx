@@ -12,12 +12,12 @@ import Link from "next/link";
 
 export const Menu = () => {
   return (
-    <section className={`mb-64 ${styles.padding} flex flex-col gap-16`}>
+    <section className={`mb-32 ${styles.padding} flex flex-col gap-16`}>
       <Title level={2} className={`${styles.title} text-secondary`}>
         The satisfying & colourful dishes
       </Title>
       <motion.div
-        className="px-16 w-full flex justify-between"
+        className="px-16 w-full flex justify-center items-center lg:items-stretch gap-8 lg:gap-0 lg:justify-between lg:flex-row flex-col"
         variants={staggerContainer()}
         whileInView="show"
         initial="hidden"
@@ -52,7 +52,7 @@ export const Menu = () => {
           variants={staggerContainer()}
           whileInView="show"
           initial="hidden"
-          className="flex px-16 justify-between"
+          className="flex flex-wrap lg:flex-nowrap justify-center lg:items-stretch gap-8 lg:gap-0 px-4 md:px-16 lg:justify-between"
         >
           <motion.li variants={fadeIn("up", 12, 60)}>
             <Card className="aspect-square w-48 p-4 grid place-items-center h-48">
