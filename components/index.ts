@@ -10,3 +10,5 @@ export { About } from "./About";
 export { Location } from "./Location";
 export { Order } from "./Order";
 export { Testimonials } from "./Testimonials";
+export { RadioGroup } from "./RadioGroup";
+export { RadioInput } from "./RadioInput";
