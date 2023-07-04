@@ -1,13 +1,17 @@
+"use client";
+
 import { Title } from "components/Title";
 import React from "react";
-import { RadioGroup, RadioInput } from "@/components";
+import { Cart, RadioGroup, RadioInput } from "@/components";
+import CartProvider from "context/CartProvider";
 
-export const page = () => {
+const OrderPage = () => {
   return (
     <main>
-      <section>
-        <Title level={2}>Your Cart</Title>
-      </section>
+      <CartProvider>
+        <Cart />
+      </CartProvider>
+      <div className=""></div>
       <form>
         <div className="flex justify-start">
           <input type="text" />
@@ -20,7 +24,7 @@ export const page = () => {
           <input type="text" />
         </div>
         <RadioGroup>
-          <RadioInput name="d" id="s">
+          <RadioInput onChange={() => {}} value="card" name="d" id="s">
             d
           </RadioInput>
         </RadioGroup>
@@ -28,3 +32,5 @@ export const page = () => {
     </main>
   );
 };
+
+export default OrderPage;

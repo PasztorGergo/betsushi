@@ -14,3 +14,5 @@ export { RadioGroup } from "./RadioGroup";
 export { RadioInput } from "./RadioInput";
 export { FoodCard } from "./FoodCard";
 export { MenuHeader } from "./MenuHeader";
+export { Cart } from "./Cart";
+export { CartItem } from "./CartItem";
