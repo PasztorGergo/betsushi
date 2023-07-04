@@ -12,7 +12,10 @@ import Link from "next/link";
 
 export const Menu = () => {
   return (
-    <section className={`mb-32 ${styles.padding} flex flex-col gap-16`}>
+    <section
+      id="menu"
+      className={`mb-32 ${styles.padding} flex flex-col gap-16`}
+    >
       <Title level={2} className={`${styles.title} text-secondary`}>
         The satisfying & colourful dishes
       </Title>

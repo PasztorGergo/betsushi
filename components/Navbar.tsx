@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   RiAncientPavilionLine,
   RiCloseLine,
   RiMenu3Line,
+  RiShoppingCart2Line,
 } from "react-icons/ri";
 import Image from "next/image";
 import { Button } from "./Button";
@@ -13,7 +14,13 @@ import styles from "../styles";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const Navbar = () => {
+  const [url, setUrl] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (document) setUrl(document.URL);
+  }, []);
+
   return (
     <>
       <nav
@@ -46,11 +53,17 @@ export const Navbar = () => {
             <Link href="#location">location</Link>
           </li>
         </ul>
-        <Button className="overflow-hidden">
-          <Link className="w-full h-full" href="/menu">
-            Order now
-          </Link>
-        </Button>
+        {url.includes("menu") || url.includes("order") ? (
+          <Button>
+            <RiShoppingCart2Line />
+          </Button>
+        ) : (
+          <Button className="overflow-hidden">
+            <Link className="w-full h-full" href="/menu">
+              Order now
+            </Link>
+          </Button>
+        )}
       </nav>
       <nav
         className={`flex md:hidden transition-all duration-500 bg-background fixed top-0 left-0 z-20 w-full h-full ${
@@ -131,12 +144,17 @@ export const Navbar = () => {
             <Link href="#location">location</Link>
           </li>
           <li>
-            {" "}
-            <Button className="overflow-hidden">
-              <Link className="w-full h-full" href="/menu">
-                Order now
-              </Link>
-            </Button>
+            {url.includes("/menu") || url.includes("/order") ? (
+              <Button>
+                <RiShoppingCart2Line />
+              </Button>
+            ) : (
+              <Button className="overflow-hidden">
+                <Link className="w-full h-full" href="/menu">
+                  Order now
+                </Link>
+              </Button>
+            )}
           </li>
         </ul>
       </nav>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { DOMAttributes } from "react";
 import { RadioInput } from "./RadioInput";
 
 export const RadioGroup = ({
@@ -8,5 +8,5 @@ export const RadioGroup = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  return <div className={`${className}`}>{children}</div>;
+  return <form className={`${className}`}>{children}</form>;
 };

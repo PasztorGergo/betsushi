@@ -9,7 +9,10 @@ import Image from "next/image";
 
 export const About = () => {
   return (
-    <section className="w-full flex flex-col items-center mb-32 md:mb-64">
+    <section
+      id="about"
+      className="w-full flex flex-col items-center mb-32 md:mb-64"
+    >
       <Title
         level={2}
         className={`text-secondary text-center mb-12 ${styles.title}`}

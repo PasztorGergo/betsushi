@@ -4,5 +4,5 @@
 
 html,
 body {
-  @apply bg-background;
+  @apply bg-background scroll-smooth;
 }

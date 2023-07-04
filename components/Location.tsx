@@ -49,7 +49,7 @@ export const Location = () => {
   }, [dailyOrders]);
 
   return (
-    <section>
+    <section id="location">
       <div
         ref={ref}
         className="bg-white flex justify-center items-center gap-12"

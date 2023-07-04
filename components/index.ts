@@ -12,3 +12,5 @@ export { Order } from "./Order";
 export { Testimonials } from "./Testimonials";
 export { RadioGroup } from "./RadioGroup";
 export { RadioInput } from "./RadioInput";
+export { FoodCard } from "./FoodCard";
+export { MenuHeader } from "./MenuHeader";

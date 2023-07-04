@@ -8,10 +8,14 @@ export const FoodCard = ({
   src,
   name,
   price,
+  className,
+  onClick,
 }: {
   src: string;
   name: string;
   price: number;
+  className?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }) => {
   const localPrice = new Intl.NumberFormat("ja-JP", {
     style: "currency",
@@ -19,8 +23,9 @@ export const FoodCard = ({
   }).format(price);
   return (
     <motion.div
+      onClick={(e) => onClick && onClick(e)}
       variants={fadeIn("left", 12, 60)}
-      className={`rounded-lg bg-center bg-contain bg-no-repeat p-4 flex justify-between items-end h-48 md:h-64 w-72 md:w-96 bg-black`}
+      className={`rounded-lg bg-center bg-contain bg-no-repeat p-4 flex justify-between items-end h-48 md:h-64 w-72 md:w-96 bg-black ${className}`}
       style={{
         backgroundImage: `url(${src})`,
       }}

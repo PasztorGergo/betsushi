@@ -1,9 +1,15 @@
+"use client";
+
+import { MenuHeader } from "@/components";
 import React from "react";
 
-export const MenuPage = () => {
+const MenuPage = () => {
   return (
     <>
+      <MenuHeader />
       <main></main>
     </>
   );
 };
+
+export default MenuPage;
