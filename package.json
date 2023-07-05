@@ -11,12 +11,14 @@
     "@googlemaps/js-api-loader": "^1.16.2",
     "@googlemaps/react-wrapper": "^1.1.35",
     "@next/font": "^13.4.7",
+    "@stripe/stripe-js": "^1.54.1",
     "framer-motion": "^10.12.18",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
-    "react-icons": "^4.10.1"
+    "react-icons": "^4.10.1",
+    "stripe": "^12.11.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.4",

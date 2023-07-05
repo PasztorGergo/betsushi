@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 export const OrderForm = () => {
   const { register, handleSubmit } = useForm();
   const [postCode, setPostCode] = useState<string>("");
-  const [payment, setPayment] = useState<"cash" | "card">();
+  const [payment, setPayment] = useState<"card_present" | "card">();
 
   const submit = (data: unknown) => {};
 
@@ -81,7 +81,7 @@ export const OrderForm = () => {
         <RadioGroup className="flex flex-col gap-8">
           <RadioInput
             onChange={(e) => {
-              setPayment(e.target.value as "card" | "cash");
+              setPayment(e.target.value as "card" | "card_present");
             }}
             value="card"
             name="payment"
@@ -103,15 +103,15 @@ export const OrderForm = () => {
           </RadioInput>
           <RadioInput
             onChange={(e) => {
-              setPayment(e.target.value as "card" | "cash");
+              setPayment(e.target.value as "card" | "card_present");
             }}
-            value="cash"
+            value="card_present"
             name="payment"
-            id="cash"
+            id="card_present"
           >
             <Card
               className={`${
-                payment === "cash" ? "bg-selected" : "bg-background"
+                payment === "card_present" ? "bg-selected" : "bg-background"
               } text-secondary transition-colors cursor-pointer gap-4 p-4 grid grid-cols-[4rem_1fr] grid-rows-2]`}
             >
               <RiMoneyCnyCircleLine className="text-[64px] col-start-1 row-span-2 row-start-1" />
