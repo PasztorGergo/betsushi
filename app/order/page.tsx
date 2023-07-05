@@ -1,6 +1,5 @@
 "use client";
 
-import { Title } from "components/Title";
 import React from "react";
 import { Cart, RadioGroup, RadioInput } from "@/components";
 import CartProvider from "context/CartProvider";

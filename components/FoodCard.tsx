@@ -25,7 +25,7 @@ export const FoodCard = ({
     <motion.div
       onClick={(e) => onClick && onClick(e)}
       variants={fadeIn("left", 12, 60)}
-      className={`rounded-lg bg-center bg-contain bg-no-repeat p-4 flex justify-between items-end h-48 md:h-64 w-72 md:w-96 bg-black ${className}`}
+      className={`rounded-lg bg-center bg-contain bg-no-repeat p-4 flex justify-between items-end h-48 lg:h-64 w-72 lg:w-96 bg-black ${className}`}
       style={{
         backgroundImage: `url(${src})`,
       }}

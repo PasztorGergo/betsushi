@@ -12,14 +12,12 @@ import { Button } from "./Button";
 import Link from "next/link";
 import styles from "../styles";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { Card } from "./Card";
 
 export const Navbar = () => {
-  const [url, setUrl] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (document) setUrl(document.URL);
-  }, []);
+  const url = usePathname();
 
   return (
     <>
@@ -53,10 +51,12 @@ export const Navbar = () => {
             <Link href="#location">location</Link>
           </li>
         </ul>
-        {url.includes("menu") || url.includes("order") ? (
-          <Button>
-            <RiShoppingCart2Line />
-          </Button>
+        {url.includes("/menu") || url.includes("/order") ? (
+          <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
+            <Link href="/order" className="w-full h-full">
+              <RiShoppingCart2Line />
+            </Link>{" "}
+          </Card>
         ) : (
           <Button className="overflow-hidden">
             <Link className="w-full h-full" href="/menu">
@@ -145,11 +145,13 @@ export const Navbar = () => {
           </li>
           <li>
             {url.includes("/menu") || url.includes("/order") ? (
-              <Button>
-                <RiShoppingCart2Line />
-              </Button>
+              <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
+                <Link href="/order" className="w-full h-full">
+                  <RiShoppingCart2Line />
+                </Link>{" "}
+              </Card>
             ) : (
-              <Button className="overflow-hidden">
+              <Button className="">
                 <Link className="w-full h-full" href="/menu">
                   Order now
                 </Link>

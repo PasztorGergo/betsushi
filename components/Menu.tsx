@@ -20,7 +20,7 @@ export const Menu = () => {
         The satisfying & colourful dishes
       </Title>
       <motion.div
-        className="px-16 w-full flex justify-center items-center lg:items-stretch gap-8 lg:gap-0 lg:justify-between lg:flex-row flex-col"
+        className="px-16 w-full flex justify-center items-center md:items-stretch gap-8 md:gap-0 lg:justify-between md:flex-row flex-col"
         variants={staggerContainer()}
         whileInView="show"
         initial="hidden"
