@@ -8,10 +8,10 @@ import styles from "../styles";
 import Image from "next/image";
 
 export const About = () => {
-  const [innerWidth, setInnerWidth] = useState<number>(0);
+  const [innerWidth, setInnerWidth] = useState<number>();
 
   useEffect(() => {
-    if (window) setInnerWidth(window.innerWidth);
+    setInnerWidth(window.innerWidth);
   }, []);
 
   return (
@@ -28,7 +28,7 @@ export const About = () => {
       <motion.div
         variants={staggerContainer()}
         whileInView="show"
-        initial={innerWidth > 768 ? "hidden" : "show"}
+        initial={innerWidth! > 768 ? "hidden" : "show"}
         viewport={{ once: false, amount: 0.25 }}
         className="relative grid grid-cols-1 md:grid-cols-2 w-full"
       >

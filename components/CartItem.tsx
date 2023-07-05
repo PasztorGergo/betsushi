@@ -5,6 +5,7 @@ import { Card } from "./Card";
 import Image from "next/image";
 import { Product } from "models";
 import { Title } from "./Title";
+import { RiCloseLine } from "react-icons/ri";
 
 export const CartItem = ({ ...props }: Product) => {
   const [state, dispatch] = useReducer(
@@ -22,10 +23,24 @@ export const CartItem = ({ ...props }: Product) => {
     { amount: props.amount }
   );
   return (
-    <Card>
-      <Image src={props.img} alt={props.name} width={128} height={128} />
-      <h3 className="font-bold text-base text-secondary">{props.name}</h3>
-      <div className="max-w-fit flex justify-center">
+    <Card className="p-4 w-full grid grid-rows-2 gap-8 grid-cols-[8rem_1fr] relative">
+      <Image
+        className="col-start-1 row-span-2 row-start-1 place-self-center"
+        src={props.img}
+        alt={props.name}
+        width={128}
+        height={128}
+      />
+      <div className="row-start-1 col-start-2 text-secondary ">
+        <h3 className="font-bold text-2xl">{props.name}</h3>
+        <p className="text-base">
+          {new Intl.NumberFormat("ja-JP", {
+            style: "currency",
+            currency: "JPY",
+          }).format(state.amount * props.price)}
+        </p>
+      </div>
+      <div className="max-w-fit flex justify-center row-start-2 col-start-2">
         <button
           onClick={() => dispatch("decrease")}
           className="bg-primary rounded-l-lg text-white text-center text-2xl p-3"
@@ -34,7 +49,7 @@ export const CartItem = ({ ...props }: Product) => {
         </button>
         <input
           type="number"
-          className="bg-white border-none outline-none focus-within:ring-primary"
+          className="bg-white border-none outline-none focus-within:ring-primary w-12 text-center"
           defaultValue={props.amount}
           value={state.amount}
           min={1}
@@ -47,6 +62,10 @@ export const CartItem = ({ ...props }: Product) => {
           <Title level={6}>+</Title>
         </button>
       </div>
+      <RiCloseLine
+        className="cursor-pointer text-secondary text-[32px] absolute top-4 hover:brightness-150 right-4"
+        onClick={() => {}}
+      />
     </Card>
   );
 };

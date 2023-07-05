@@ -16,3 +16,4 @@ export { FoodCard } from "./FoodCard";
 export { MenuHeader } from "./MenuHeader";
 export { Cart } from "./Cart";
 export { CartItem } from "./CartItem";
+export { OrderForm } from "./OrderForm";
