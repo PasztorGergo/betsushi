@@ -21,9 +21,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrder(items),
     currency: "jpy",
     payment_method_types: [method],
+    amount: calculateOrder(items),
   });
 
   res.status(200).send({

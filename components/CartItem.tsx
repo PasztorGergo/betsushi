@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { Card } from "./Card";
 import Image from "next/image";
 import { Product } from "models";
 import { Title } from "./Title";
 import { RiCloseLine } from "react-icons/ri";
+import { useCart } from "context/CartProvider";
 
 export const CartItem = ({ ...props }: Product) => {
+  const { setCart, cart } = useCart()!;
   const [state, dispatch] = useReducer(
     (state: { amount: number }, action: "increase" | "decrease") => {
       if (action === "increase") {
@@ -22,6 +24,15 @@ export const CartItem = ({ ...props }: Product) => {
     },
     { amount: props.amount }
   );
+
+  useEffect(() => {
+    const search = cart.find((x) => x.id === props.id);
+    setCart((prev) => [
+      { amount: state, ...search } as Product,
+      ...prev.filter((x) => x.id !== props.id),
+    ]);
+  }, [state]);
+
   return (
     <Card className="p-4 w-full grid grid-rows-2 gap-8 grid-cols-[8rem_1fr] relative">
       <Image
@@ -64,7 +75,9 @@ export const CartItem = ({ ...props }: Product) => {
       </div>
       <RiCloseLine
         className="cursor-pointer text-secondary text-[32px] absolute top-4 hover:brightness-150 right-4"
-        onClick={() => {}}
+        onClick={() => {
+          setCart((prev) => [...prev.filter((x) => x.id !== props.id)]);
+        }}
       />
     </Card>
   );

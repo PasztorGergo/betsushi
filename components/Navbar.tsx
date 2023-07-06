@@ -51,9 +51,9 @@ export const Navbar = () => {
             <Link href="#location">location</Link>
           </li>
         </ul>
-        {url.includes("/menu") || url.includes("/order") ? (
+        {url?.includes("/menu") || url?.includes("/cart") ? (
           <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
-            <Link href="/order" className="w-full h-full">
+            <Link href="/cart" className="w-full h-full">
               <RiShoppingCart2Line />
             </Link>{" "}
           </Card>
@@ -144,9 +144,9 @@ export const Navbar = () => {
             <Link href="#location">location</Link>
           </li>
           <li>
-            {url.includes("/menu") || url.includes("/order") ? (
+            {url?.includes("/menu") || url?.includes("/cart") ? (
               <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
-                <Link href="/order" className="w-full h-full">
+                <Link href="/cart" className="w-full h-full">
                   <RiShoppingCart2Line />
                 </Link>{" "}
               </Card>
