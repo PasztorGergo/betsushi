@@ -68,7 +68,7 @@ export const Navbar = () => {
       <nav
         className={`flex md:hidden transition-all duration-500 bg-background fixed top-0 left-0 z-20 w-full h-full ${
           isOpen
-            ? "[clip-path:circle(200vw_at_calc(100%_-_2.5rem)_2.5rem)]"
+            ? "[clip-path:circle(calc(100vw_+_100vh)_at_calc(100%_-_2.5rem)_2.5rem)]"
             : "[clip-path:circle(2rem_at_calc(100%_-_2.5rem)_2.5rem)]"
         } `}
       >
@@ -134,16 +134,25 @@ export const Navbar = () => {
           )}
         </AnimatePresence>
         <ul className="flex w-full h-full items-center justify-center gap-8 text-secondary font-bold flex-col text-xl uppercase">
-          <li className="cursor-pointer hover:brightness-150 transition">
+          <li
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer hover:brightness-150 transition"
+          >
             <Link href="/#about">about</Link>
           </li>
-          <li className="cursor-pointer hover:brightness-150 transition">
+          <li
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer hover:brightness-150 transition"
+          >
             <Link href="/#menu">menu</Link>
           </li>
-          <li className="cursor-pointer hover:brightness-150 transition">
+          <li
+            onClick={() => setIsOpen(false)}
+            className="cursor-pointer hover:brightness-150 transition"
+          >
             <Link href="/#location">location</Link>
           </li>
-          <li>
+          <li onClick={() => setIsOpen(false)}>
             {url?.includes("/menu") || url?.includes("/cart") ? (
               <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
                 <Link href="/cart" className="w-full h-full">

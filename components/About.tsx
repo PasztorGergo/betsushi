@@ -1,19 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { fadeIn, staggerContainer } from "utils";
 import { Title } from "./Title";
 import styles from "../styles";
 import Image from "next/image";
 
 export const About = () => {
-  const [innerWidth, setInnerWidth] = useState<number>();
-
-  useEffect(() => {
-    setInnerWidth(window.innerWidth);
-  }, []);
-
   return (
     <section
       id="about"
@@ -28,7 +22,7 @@ export const About = () => {
       <motion.div
         variants={staggerContainer()}
         whileInView="show"
-        initial={innerWidth! > 768 ? "hidden" : "show"}
+        initial={innerWidth > 768 ? "hidden" : "show"}
         viewport={{ once: false, amount: 0.25 }}
         className="relative grid grid-cols-1 md:grid-cols-2 w-full"
       >
@@ -98,7 +92,7 @@ export const About = () => {
           alt="Japanese Imperial Seal"
           width={206}
           height={206}
-          className="absolute m-auto inset-0 md:block hidden"
+          className="absolute m-auto inset-0 md:block hidden w-1/6 h-1/6 lg:w-[206px] lg:h-[206px]"
         />
       </motion.div>
     </section>
