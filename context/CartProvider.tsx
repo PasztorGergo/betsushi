@@ -26,7 +26,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       },
       {
         id: "price_1NRCwrAlaM3JXMGCQkM5t7RQ",
-        img: "/kenbishi.jpg",
+        img: "/kenbishi.png",
         name: "Kenbishi Sake",
         price: 529,
         type: "drinks",

@@ -8,6 +8,11 @@ import { Title } from "./Title";
 import { RiCloseLine } from "react-icons/ri";
 import { useCart } from "context/CartProvider";
 
+const currencyFormatter = new Intl.NumberFormat("ja-JP", {
+  style: "currency",
+  currency: "JPY",
+});
+
 export const CartItem = ({ ...props }: Product) => {
   const { setCart, cart } = useCart()!;
   const [state, dispatch] = useReducer(
@@ -26,17 +31,14 @@ export const CartItem = ({ ...props }: Product) => {
   );
 
   useEffect(() => {
-    const search = cart.find((x) => x.id === props.id);
-    setCart((prev) => [
-      { amount: state, ...search } as Product,
-      ...prev.filter((x) => x.id !== props.id),
-    ]);
+    const searchIndex = cart.findIndex((x) => x.id === props.id);
+    cart[searchIndex].amount = state.amount;
   }, [state]);
 
   return (
     <Card className="p-4 w-full grid grid-rows-2 gap-8 grid-cols-[8rem_1fr] relative">
       <Image
-        className="col-start-1 row-span-2 row-start-1 place-self-center"
+        className="col-start-1 row-span-2 row-start-1 place-self-center max-w-[8rem] max-h-32 object-contain"
         src={props.img}
         alt={props.name}
         width={128}
@@ -45,10 +47,7 @@ export const CartItem = ({ ...props }: Product) => {
       <div className="row-start-1 col-start-2 text-secondary ">
         <h3 className="font-bold text-2xl">{props.name}</h3>
         <p className="text-base">
-          {new Intl.NumberFormat("ja-JP", {
-            style: "currency",
-            currency: "JPY",
-          }).format(state.amount * props.price)}
+          {currencyFormatter.format(state.amount * props.price)}
         </p>
       </div>
       <div className="max-w-fit flex justify-center row-start-2 col-start-2">

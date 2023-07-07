@@ -15,7 +15,7 @@ export const Cart = () => {
       </Title>
       <div className="grid md:grid-cols-2 grid-cols-1 w-full gap-8">
         {cart.length > 0 ? (
-          cart.map((props) => <CartItem {...props} />)
+          cart.map((props) => <CartItem key={props.id} {...props} />)
         ) : (
           <h3
             className={`${styles.title} text-opacity-75 col-start-1 row-start-1 row-span-2 col-span-2 place-self-center text-secondary`}

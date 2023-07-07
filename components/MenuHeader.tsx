@@ -35,11 +35,7 @@ export const MenuHeader = () => {
         </Title>
         <FoodCard name="Kenbishi sake" price={529} src="/kenbishi.png" />
       </motion.div>
-      <motion.div
-        variants={fadeIn("up", 12, 60)}
-        whileInView="show"
-        initial="hidden"
-      >
+      <div>
         <Title level={3} className="text-secondary text-2xl text-center mb-8">
           Select fro mthe categories
         </Title>
@@ -160,7 +156,7 @@ export const MenuHeader = () => {
             </Card>
           </RadioInput>
         </RadioGroup>
-      </motion.div>
+      </div>
     </header>
   );
 };
