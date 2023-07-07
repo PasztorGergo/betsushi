@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Title } from "./Title";
 import { RadioInput } from "./RadioInput";
 import { RadioGroup } from "./RadioGroup";
@@ -9,11 +9,11 @@ import { fadeIn, staggerContainer } from "utils";
 import { motion } from "framer-motion";
 import styles from "../styles";
 import Image from "next/image";
-
-type Meals = "makis" | "nigiris" | "drinks" | "starters" | "soups";
+import { Category } from "models";
+import { useCart } from "context/CartProvider";
 
 export const MenuHeader = () => {
-  const [selected, setSelected] = useState<Meals>();
+  const { category, setCategory } = useCart()!;
 
   return (
     <header
@@ -45,14 +45,14 @@ export const MenuHeader = () => {
         </Title>
         <RadioGroup className="flex flex-wrap lg:flex-nowrap justify-center lg:items-stretch gap-8 px-4 md:px-16í">
           <RadioInput
-            onChange={(e) => setSelected(e.target.id as Meals)}
+            onChange={(e) => setCategory(e.target.id as Category)}
             value="makis"
             name="meal"
             id="makis"
           >
             <Card
               className={`cursor-pointer transition-all aspect-square w-48 p-4 grid place-items-center h-48 ${
-                selected === "makis" ? "bg-selected" : "bg-background"
+                category === "makis" ? "bg-selected" : "bg-background"
               }`}
             >
               <Image
@@ -68,14 +68,14 @@ export const MenuHeader = () => {
             </Card>
           </RadioInput>
           <RadioInput
-            onChange={(e) => setSelected(e.target.id as Meals)}
-            value="nigiris"
+            onChange={(e) => setCategory(e.target.id as Category)}
+            value="nigiri"
             name="meal"
-            id="nigiris"
+            id="nigiri"
           >
             <Card
               className={`cursor-pointer transition-all aspect-square w-48 p-4 grid place-items-center h-48 ${
-                selected === "nigiris" ? "bg-selected" : "bg-background"
+                category === "nigiri" ? "bg-selected" : "bg-background"
               }`}
             >
               <Image
@@ -91,14 +91,14 @@ export const MenuHeader = () => {
             </Card>
           </RadioInput>
           <RadioInput
-            onChange={(e) => setSelected(e.target.id as Meals)}
+            onChange={(e) => setCategory(e.target.id as Category)}
             value="drinks"
             name="meal"
             id="drinks"
           >
             <Card
               className={`cursor-pointer transition-all aspect-square w-48 p-4 grid place-items-center h-48 ${
-                selected === "drinks" ? "bg-selected" : "bg-background"
+                category === "drinks" ? "bg-selected" : "bg-background"
               }`}
             >
               <Image
@@ -114,14 +114,14 @@ export const MenuHeader = () => {
             </Card>
           </RadioInput>
           <RadioInput
-            onChange={(e) => setSelected(e.target.id as Meals)}
+            onChange={(e) => setCategory(e.target.id as Category)}
             value="starters"
             name="meal"
             id="starters"
           >
             <Card
               className={`cursor-pointer transition-all aspect-square w-48 p-4 grid place-items-center h-48 ${
-                selected === "starters" ? "bg-selected" : "bg-background"
+                category === "starters" ? "bg-selected" : "bg-background"
               }`}
             >
               <Image
@@ -137,14 +137,14 @@ export const MenuHeader = () => {
             </Card>
           </RadioInput>
           <RadioInput
-            onChange={(e) => setSelected(e.target.id as Meals)}
+            onChange={(e) => setCategory(e.target.id as Category)}
             value="soups"
             name="meal"
             id="soups"
           >
             <Card
               className={`cursor-pointer transition-all aspect-square w-48 p-4 grid place-items-center h-48 ${
-                selected === "soups" ? "bg-selected" : "bg-background"
+                category === "soups" ? "bg-selected" : "bg-background"
               }`}
             >
               <Image
