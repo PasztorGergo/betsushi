@@ -42,13 +42,13 @@ export const Navbar = () => {
             </Link>
           </li>
           <li className="cursor-pointer hover:brightness-150 transition">
-            <Link href="#about">about</Link>
+            <Link href="/#about">about</Link>
           </li>
           <li className="cursor-pointer hover:brightness-150 transition">
-            <Link href="#menu">menu</Link>
+            <Link href="/#menu">menu</Link>
           </li>
           <li className="cursor-pointer hover:brightness-150 transition">
-            <Link href="#location">location</Link>
+            <Link href="/#location">location</Link>
           </li>
         </ul>
         {url?.includes("/menu") || url?.includes("/cart") ? (
@@ -135,13 +135,13 @@ export const Navbar = () => {
         </AnimatePresence>
         <ul className="flex w-full h-full items-center justify-center gap-8 text-secondary font-bold flex-col text-xl uppercase">
           <li className="cursor-pointer hover:brightness-150 transition">
-            <Link href="#about">about</Link>
+            <Link href="/#about">about</Link>
           </li>
           <li className="cursor-pointer hover:brightness-150 transition">
-            <Link href="#menu">menu</Link>
+            <Link href="/#menu">menu</Link>
           </li>
           <li className="cursor-pointer hover:brightness-150 transition">
-            <Link href="#location">location</Link>
+            <Link href="/#location">location</Link>
           </li>
           <li>
             {url?.includes("/menu") || url?.includes("/cart") ? (
