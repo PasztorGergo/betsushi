@@ -16,6 +16,10 @@ const OrderReview = () => {
   const [orderData, setOrderData] = useState<Order>();
   const { setCart } = useCart()!;
   const router = useRouter();
+  const formatter = new Intl.NumberFormat("ja-JP", {
+    currency: "JPY",
+    style: "currency",
+  });
 
   useEffect(() => {
     if (!searchParams?.get("clientSecret")) {
@@ -40,6 +44,35 @@ const OrderReview = () => {
       <h3 className="text-secondary text-l font-bold text-center">
         Order review
       </h3>
+      <ul className="grid grid-cols-2 grid-rows-4 group rounded-lg p-4 border border-primary">
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-1 row-start-1">
+          Name
+        </li>
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-1 row-start-2">
+          Phone number
+        </li>
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-1 row-start-3">
+          Address
+        </li>
+
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-1 row-start-4">
+          Total
+        </li>
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-1">
+          {orderData?.shipping_details?.name}
+        </li>
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-3"></li>
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-2">
+          〒{orderData?.shipping_details?.address?.postal_code},{" "}
+          {orderData?.shipping_details?.address?.state}{" "}
+          {orderData?.shipping_details?.address?.city},{" "}
+          {orderData?.shipping_details?.address?.line1},{" "}
+          {orderData?.shipping_details?.address?.line2}
+        </li>
+        <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-4">
+          {formatter.format(orderData?.amount_total || 0)}
+        </li>
+      </ul>
       <Button>
         <Link href="/">Back to home</Link>
       </Button>
