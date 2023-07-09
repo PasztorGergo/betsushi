@@ -1,24 +1,23 @@
 "use client";
 
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles";
 import { Title } from "./Title";
 import { Button } from "./Button";
-import { useCart } from "context/CartProvider";
-import { Product } from "models";
 import {
   PaymentElement,
   useStripe,
   useElements,
   AddressElement,
+  LinkAuthenticationElement,
 } from "@stripe/react-stripe-js";
 import { useSearchParams } from "next/navigation";
 
 export const OrderForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const [email, setEmail] = useState<string>("");
 
-  const { cart } = useCart()!;
   const [clientSecret, setClientSecret] = useState<string>("");
   const params = useSearchParams();
   const [address, setAddress] = useState<{
@@ -78,7 +77,8 @@ export const OrderForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/order-review",
+        receipt_email: email,
       },
     });
 
@@ -101,6 +101,11 @@ export const OrderForm = () => {
         className={`${styles.padding} flex flex-col items-center gap-8`}
         id="payment-form"
       >
+        <LinkAuthenticationElement
+          onChange={(e) => {
+            setEmail(e.value.email);
+          }}
+        />
         <AddressElement
           options={{
             mode: "shipping",
