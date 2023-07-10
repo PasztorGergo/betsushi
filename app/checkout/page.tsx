@@ -21,7 +21,6 @@ const CheckoutPage = () => {
       .then((res) => res.json())
       .then((data) => {
         setClientSecret(data.clientSecret);
-        console.log(data);
       });
   }, []);
 

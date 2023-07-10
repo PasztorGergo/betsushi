@@ -5,16 +5,16 @@ import { Button } from "components/Button";
 import { Title } from "components/Title";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { useStripe } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Order } from "@stripe/stripe-js";
 import { useCart } from "context/CartProvider";
 
 const OrderReview = () => {
+  const stripe = loadStripe(process.env.STRIPE_PUBLIC || "");
   const searchParams = useSearchParams();
-  const stripe = useStripe();
   const [orderData, setOrderData] = useState<Order>();
-  const { setCart } = useCart()!;
+  const { setCart, cart } = useCart()!;
   const router = useRouter();
   const formatter = new Intl.NumberFormat("ja-JP", {
     currency: "JPY",
@@ -22,22 +22,34 @@ const OrderReview = () => {
   });
 
   useEffect(() => {
-    if (!searchParams?.get("clientSecret")) {
+    if (!searchParams?.get("payment_intent")) {
       router.replace("/");
     } else {
-      stripe
-        ?.retrieveOrder(searchParams?.get("clientSecret")!)
-        .then((x) => setOrderData(x.order));
+      fetch("/api/payment", {
+        method: "POST",
+        body: JSON.stringify({ items: cart }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          stripe.then((x) =>
+            x
+              ?.retrieveOrder(data.clientSecret)
+              .then((y) => setOrderData(y.order))
+          );
+        });
 
       setCart([]);
     }
   }, []);
   return (
-    <main className="flex flex-col items-center">
-      <Title level={2} className={`${styles.title} text-secondary`}>
+    <main
+      className={`flex flex-col items-center h-full gap-8 w-full ${styles.padding}`}
+    >
+      <Title level={2} className={`${styles.title} text-primary`}>
         Your order is on the way
       </Title>
-      <p>
+      <p className="text-secondary">
         Thank you for ordering from our restaurant. Your meal will be ready to
         go soon.
       </p>
