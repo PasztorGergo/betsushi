@@ -72,14 +72,14 @@ export const Menu = () => {
       <Title level={2} className={`${styles.title} text-secondary`}>
         The satisfying & colourful dishes
       </Title>
-      <motion.div
-        className="px-16 w-full flex justify-center items-center md:items-stretch gap-8 md:gap-0 lg:justify-between md:flex-row flex-col"
-        variants={staggerContainer()}
-        whileInView="show"
-        initial="hidden"
-      >
-        {!loading &&
-          dailyOffers.map(({ id, img, name, price, type }, i) =>
+      {!loading && (
+        <motion.div
+          className="px-16 w-full flex justify-center items-center md:items-stretch gap-8 md:gap-0 lg:justify-between md:flex-row flex-col"
+          variants={staggerContainer()}
+          whileInView="show"
+          initial="hidden"
+        >
+          {dailyOffers.map(({ id, img, name, price, type }, i) =>
             i === 0 ? (
               <>
                 <div className="relative" key={id}>
@@ -102,7 +102,8 @@ export const Menu = () => {
               <FoodCard name={name} price={price} src={img} key={id} />
             )
           )}
-      </motion.div>
+        </motion.div>
+      )}
 
       <motion.div
         variants={fadeIn("up", 12, 60)}
