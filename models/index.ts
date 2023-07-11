@@ -5,7 +5,13 @@ export interface Product {
   amount: number;
   img: string;
 }
-export type Category = "makis" | "nigiri" | "drinks" | "starters" | "soups";
+export type Category =
+  | "makis"
+  | "nigiri"
+  | "drinks"
+  | "starters"
+  | "soups"
+  | "special";
 export interface Meals {
   id: string;
   price: number;

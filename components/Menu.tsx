@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles";
 import { Title } from "./Title";
 import { motion } from "framer-motion";
@@ -9,8 +9,61 @@ import { Card } from "./Card";
 import Image from "next/image";
 import { Button } from "./Button";
 import Link from "next/link";
+import { Meals } from "models";
 
 export const Menu = () => {
+  const [dailyOffers, setDailyOffers] = useState<Array<Meals>>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/getItemsByCategory", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ category: "special" }),
+    })
+      .then((x) => x.json())
+      .then(({ data }) => {
+        console.log(data);
+
+        const type = data.categories.nodes[0].name;
+        const mealsArray = data.categories.nodes[0].posts.nodes.map(
+          ({
+            content,
+            featuredImage,
+            title,
+            tags,
+          }: {
+            content: string;
+            featuredImage: {
+              node: { sourceUrl: string; altText: string };
+            };
+            title: string;
+            tags: { nodes: Array<{ name: string }> };
+          }) =>
+            ({
+              id: tags.nodes[0].name,
+              img: featuredImage.node.sourceUrl,
+              name: title,
+              price: parseInt(
+                content
+                  .replaceAll("</p>", "")
+                  .replaceAll("<p>", "")
+                  .replaceAll("\n", "")
+              ),
+              type,
+            } as Meals)
+        );
+
+        console.log(mealsArray);
+
+        setDailyOffers(mealsArray);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  console.log(dailyOffers);
+
   return (
     <section
       id="menu"
@@ -25,24 +78,32 @@ export const Menu = () => {
         whileInView="show"
         initial="hidden"
       >
-        <div className="relative">
-          <Title
-            level={3}
-            className="text-primary text-3xl absolute top-2 -left-8 z-10 uppercase"
-          >
-            Daily Offer
-          </Title>
-          <FoodCard
-            name="Zenbu Nigiri"
-            price={959}
-            src="/DailyOfferSushi.jpg"
-          />
-        </div>
-        <Title level={3} className="text-secondary text-6xl self-center">
-          &
-        </Title>
-        <FoodCard name="Kenbishi sake" price={529} src="/kenbishi.png" />
+        {!loading &&
+          dailyOffers.map(({ id, img, name, price, type }, i) =>
+            i === 0 ? (
+              <>
+                <div className="relative" key={id}>
+                  <Title
+                    level={3}
+                    className="text-primary text-3xl absolute top-2 -left-8 z-10 uppercase"
+                  >
+                    Daily Offer
+                  </Title>
+                  <FoodCard name={name} price={price} src={img} />
+                </div>
+                <Title
+                  level={3}
+                  className="text-secondary text-6xl self-center"
+                >
+                  &
+                </Title>
+              </>
+            ) : (
+              <FoodCard name={name} price={price} src={img} key={id} />
+            )
+          )}
       </motion.div>
+
       <motion.div
         variants={fadeIn("up", 12, 60)}
         whileInView="show"
