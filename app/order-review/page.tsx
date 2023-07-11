@@ -9,38 +9,30 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Order } from "@stripe/stripe-js";
 import { useCart } from "context/CartProvider";
+import { Product } from "models";
 
 const OrderReview = () => {
-  const stripe = loadStripe(process.env.STRIPE_PUBLIC || "");
-  const searchParams = useSearchParams();
-  const [orderData, setOrderData] = useState<Order>();
+  const [orderData, setOrderData] = useState<{
+    total: number;
+    items: Array<Product>;
+  }>();
   const { setCart, cart } = useCart()!;
-  const router = useRouter();
   const formatter = new Intl.NumberFormat("ja-JP", {
     currency: "JPY",
     style: "currency",
   });
 
   useEffect(() => {
-    if (!searchParams?.get("payment_intent")) {
-      router.replace("/");
-    } else {
-      fetch("/api/payment", {
-        method: "POST",
-        body: JSON.stringify({ items: cart }),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          stripe.then((x) =>
-            x
-              ?.retrieveOrder(data.clientSecret)
-              .then((y) => setOrderData(y.order))
-          );
-        });
+    const total = cart.reduce((prev, current, i) => ({
+      ...current,
+      price: prev.price + current.price,
+    })).price;
+    setOrderData({
+      items: cart,
+      total,
+    });
 
-      setCart([]);
-    }
+    setCart([]);
   }, []);
   return (
     <main

@@ -39,3 +39,32 @@ export const getItemsByCategory = async (category: Category) =>
     }
   }
 `);
+export const pushPayment = async (id: string, total: number, date: Date) => {
+  await fetchAPI(`
+    mutation PushPayment{
+      createPost(
+        input: {categories: {nodes: {name: "payment"}}, content: "${total}", date: "${date}", title: "${id}"}
+      ) {
+        post {
+          content
+          contentType {
+            node {
+              name
+            }
+          }
+          date
+          tags {
+            nodes {
+              name
+            }
+          }
+          categories {
+            nodes {
+              name
+            }
+          }
+        }
+      }
+    }
+  `);
+};

@@ -37,7 +37,7 @@ export const MenuHeader = () => {
       </motion.div>
       <div>
         <Title level={3} className="text-secondary text-2xl text-center mb-8">
-          Select fro mthe categories
+          Select from the categories
         </Title>
         <RadioGroup className="flex flex-wrap lg:flex-nowrap justify-center lg:items-stretch gap-8 px-4 md:px-16í">
           <RadioInput
