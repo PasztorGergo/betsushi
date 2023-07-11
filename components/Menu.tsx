@@ -24,8 +24,6 @@ export const Menu = () => {
     })
       .then((x) => x.json())
       .then(({ data }) => {
-        console.log(data);
-
         const type = data.categories.nodes[0].name;
         const mealsArray = data.categories.nodes[0].posts.nodes.map(
           ({
@@ -55,14 +53,10 @@ export const Menu = () => {
             } as Meals)
         );
 
-        console.log(mealsArray);
-
         setDailyOffers(mealsArray);
       })
       .finally(() => setLoading(false));
   }, []);
-
-  console.log(dailyOffers);
 
   return (
     <section

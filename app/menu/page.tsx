@@ -1,19 +1,75 @@
 "use client";
 
-import { FoodCard, MenuHeader, Title } from "@/components";
+import { FoodCard, MenuHeader, SkeletonCard, Title } from "@/components";
 import styles from "@/styles/index";
 import { useCart } from "context/CartProvider";
-import React from "react";
+import { Meals } from "models";
+import React, { useEffect, useState } from "react";
 
 const MenuPage = () => {
-  const { category, meals } = useCart()!;
+  const { category } = useCart()!;
+  const [meals, setMeals] = useState<Array<Meals>>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/getItemsByCategory", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({ category }),
+    })
+      .then((x) => x.json())
+      .then(({ data }) => {
+        const type = data.categories.nodes[0].name;
+        const mealsArray = data.categories.nodes[0].posts.nodes.map(
+          ({
+            content,
+            featuredImage,
+            title,
+            tags,
+          }: {
+            content: string;
+            featuredImage: {
+              node: { sourceUrl: string; altText: string };
+            };
+            title: string;
+            tags: { nodes: Array<{ name: string }> };
+          }) =>
+            ({
+              id: tags.nodes[0].name,
+              img: featuredImage.node.sourceUrl,
+              name: title,
+              price: parseInt(
+                content
+                  .replaceAll("</p>", "")
+                  .replaceAll("<p>", "")
+                  .replaceAll("\n", "")
+              ),
+              type,
+            } as Meals)
+        );
+
+        setMeals(mealsArray);
+      })
+      .finally(() => setLoading(false));
+  }, [category]);
+
   return (
     <>
       <MenuHeader />
       <main
         className={`${styles.padding} flex flex-wrap items-center justify-start gap-8 content-center mt-12`}
       >
-        {meals.filter((x) => x.type === category).length > 0 ? (
+        {loading ? (
+          <>
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </>
+        ) : meals.filter((x) => x.type === category).length > 0 ? (
           meals.map(
             ({ id, img, type, ...props }) =>
               type === category && <FoodCard {...props} src={img} key={id} />
