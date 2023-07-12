@@ -39,11 +39,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (event.object.status === "succeeded") {
       const id = event.object.id;
+      const name = event.object.shipping.name;
+      const phone = event.object.shipping.phone;
       const total = parseInt(event.object.amount);
       const { line1, line2, postal_code, state } =
-        event.object.charges.data[0].shipping;
+        event.object.charges.data[0].shipping.address;
       const shipping_details = `〒${postal_code} ${state} ${line1} ${line2}`;
-      pushPayment(id, total, new Date(), shipping_details)
+
+      pushPayment(id, total, new Date(), shipping_details, name, phone)
         .catch(() => res.status(500).json({ message: "Server error" }))
         .then((x) => {
           res.status(200).json({ data: x });

@@ -43,12 +43,14 @@ export const pushPayment = async (
   id: string,
   total: number,
   date: Date,
-  shipping_details: string
+  shipping_details: string,
+  name: string,
+  phone: string
 ) => {
   await fetchAPI(`
     mutation PushPayment{
       createPost(
-        input: {categories: {nodes: {name: "payment"}}, tags: {nodes: {name: "${shipping_details}"}}, content: "${total}", date: "${date}", title: "${id}"}
+        input: {categories: {nodes: {name: "payment"}}, tags: {nodes: {name: "${shipping_details}"}}, content: "${name},${total},${phone}", date: "${date}", title: "${id}"}
       ) {
         post {
           content
@@ -73,7 +75,7 @@ export const pushPayment = async (
     }
   `);
 };
-export const getPaymentById = async (id: string) => {
+export const getPaymentById = async (id: string) =>
   fetchAPI(`
     query GetPayment{
       categories(where: {name: "payment"}) {
@@ -94,4 +96,3 @@ export const getPaymentById = async (id: string) => {
       }
     }
   `);
-};
