@@ -6,15 +6,13 @@ import { Title } from "components/Title";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Order } from "@stripe/stripe-js";
 import { useCart } from "context/CartProvider";
-import { Product } from "models";
 
 const OrderReview = () => {
   const [orderData, setOrderData] = useState<{
     total: number;
     items: string;
-    shipping_details: string;
+    address: string;
     phoneNumber: string;
     name: string;
   }>();
@@ -34,24 +32,14 @@ const OrderReview = () => {
     })
       .then((x) => x.json())
       .then(({ data }) => {
-        const parsedContent = data.categories.nodes[0].posts.nodes[0].content
-          .replaceAll("<p>", "")
-          .replaceAll("</p>", "")
-          .replaceAll("\n", "")
-          .split(",");
-        const total = parseInt(parsedContent[1]);
-        const name = parsedContent[0];
-        const phoneNumber = parsedContent[2];
-        const items = cart.map(({ name }) => name).join(", ");
-        const shipping_details =
-          data.categories.nodes[0].posts.nodes[0].tags.nodes[0].name;
-
+        const { name, total, address, phone } =
+          data.paymentsCollection.edges[0].node;
         setOrderData({
           total,
-          items,
-          shipping_details,
+          items: cart.map(({ name }) => name).join(", "),
+          address,
           name,
-          phoneNumber,
+          phoneNumber: phone,
         });
       });
 
@@ -94,7 +82,7 @@ const OrderReview = () => {
           {orderData?.phoneNumber}
         </li>
         <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-2">
-          {orderData?.shipping_details}
+          {orderData?.address}
         </li>
         <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-4">
           {formatter.format(orderData?.total || 0)}

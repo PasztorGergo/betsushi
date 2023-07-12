@@ -9,6 +9,8 @@ const nextConfig = {
     STRIPE_PUBLIC: process.env.STRIPE_PUBLIC,
     WH_SECRET: process.env.WH_SECRET,
     GQL_ENDPOINT: process.env.GQL_ENDPOINT,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
   },
   images: {
     domains: ["thispersondoesnotexist.com"],

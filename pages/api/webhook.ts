@@ -31,10 +31,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       event = stripe.webhooks.constructEvent(
         rawBody.toString(),
         sig,
-        process.env.STRIPE_WH || ""
+        process.env.WH_SECRET || ""
       );
     } catch (error: any) {
-      return res.status(400).send(`Webhook error: ${error}`);
+      res.status(400).send(`Webhook error: ${error}`);
     }
 
     if (event.object.status === "succeeded") {
@@ -47,11 +47,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const shipping_details = `〒${postal_code} ${state} ${line1} ${line2}`;
 
       pushPayment(id, total, new Date(), shipping_details, name, phone)
-        .catch(() => res.status(500).json({ message: "Server error" }))
-        .then((x) => {
-          res.status(200).json({ data: x });
-        });
+        .then((data) => {
+          res.status(200).json({ data });
+        })
+        .catch(() => res.status(500).json({ message: "Server error" }));
     }
+  } else {
+    res.status(400).json({ message: "Bad request" });
   }
 };
 
