@@ -15,6 +15,7 @@ const OrderReview = () => {
   const [orderData, setOrderData] = useState<{
     total: number;
     items: Array<Product>;
+    shipping_details: string;
   }>();
   const { setCart, cart } = useCart()!;
   const formatter = new Intl.NumberFormat("ja-JP", {
@@ -27,10 +28,6 @@ const OrderReview = () => {
       ...current,
       price: prev.price + current.price,
     })).price;
-    setOrderData({
-      items: cart,
-      total,
-    });
 
     setCart([]);
   }, []);
@@ -67,7 +64,7 @@ const OrderReview = () => {
         </li>
         <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-3"></li>
         <li className="bg-background divide-primary divide-opacity-50 group-odd:bg-selected col-start-2 row-start-2">
-          〒{orderData?.shipping_details?.address?.postal_code},{" "}
+          {orderData?.shipping_details?.address?.postal_code},{" "}
           {orderData?.shipping_details?.address?.state}{" "}
           {orderData?.shipping_details?.address?.city},{" "}
           {orderData?.shipping_details?.address?.line1},{" "}

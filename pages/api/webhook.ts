@@ -3,6 +3,7 @@ import { buffer } from "micro";
 import Stripe from "stripe";
 import Cors from "micro-cors";
 import { pushPayment } from "utils/fetch";
+import { PaymentRequestEvent } from "@stripe/stripe-js";
 
 const stripe = new Stripe(process.env.STRIPE_SK || "", {
   apiVersion: "2022-11-15",
@@ -39,8 +40,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (event.object.status === "succeeded") {
       const id = event.object.id;
       const total = parseInt(event.object.amount);
-
-      pushPayment(id, total, new Date())
+      const { line1, line2, postal_code, state } =
+        event.object.charges.data[0].shipping;
+      const shipping_details = `〒${postal_code} ${state} ${line1} ${line2}`;
+      pushPayment(id, total, new Date(), shipping_details)
         .catch(() => res.status(500).json({ message: "Server error" }))
         .then((x) => {
           res.status(200).json({ data: x });

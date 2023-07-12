@@ -39,11 +39,16 @@ export const getItemsByCategory = async (category: Category) =>
     }
   }
 `);
-export const pushPayment = async (id: string, total: number, date: Date) => {
+export const pushPayment = async (
+  id: string,
+  total: number,
+  date: Date,
+  shipping_details: string
+) => {
   await fetchAPI(`
     mutation PushPayment{
       createPost(
-        input: {categories: {nodes: {name: "payment"}}, content: "${total}", date: "${date}", title: "${id}"}
+        input: {categories: {nodes: {name: "payment"}}, tags: {nodes: {name: "${shipping_details}"}}, content: "${total}", date: "${date}", title: "${id}"}
       ) {
         post {
           content
@@ -61,6 +66,28 @@ export const pushPayment = async (id: string, total: number, date: Date) => {
           categories {
             nodes {
               name
+            }
+          }
+        }
+      }
+    }
+  `);
+};
+export const getPaymentById = async (id: string) => {
+  fetchAPI(`
+    query GetPayment{
+      categories(where: {name: "payment"}) {
+        nodes {
+          posts(where: {title: "${id}"}) {
+            nodes {
+              date
+              tags {
+                nodes {
+                  name
+                }
+              }
+              title
+              content
             }
           }
         }
