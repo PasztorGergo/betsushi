@@ -1,9 +1,10 @@
 "use client";
 
 import { Footer, Navbar } from "@/components";
-import React from "react";
+import React, { Suspense } from "react";
 import "../styles/global.css";
 import CartProvider from "context/CartProvider";
+import Loader from "./loading";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -15,7 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <CartProvider>
         <body className="overflow-x-hidden">
           <Navbar />
-          {children}
+          <Suspense fallback={<Loader />}>{children}</Suspense>
           <Footer />
         </body>
       </CartProvider>

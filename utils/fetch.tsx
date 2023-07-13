@@ -1,4 +1,5 @@
 import { Category } from "models";
+import supabase from "./supabase";
 
 async function fetchAPI(query = "") {
   const headers = { "Content-Type": "application/json" };
@@ -49,53 +50,15 @@ export const pushPayment = async (
   shipping_details: string,
   name: string,
   phone: string
-) =>
-  await fetch(`${process.env.SUPABASE_URL}/graphql/v1`, {
-    method: "POST",
-    headers: {
-      apikey: `${process.env.SUPABASE_ANON_KEY}`,
-      authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-    },
-    body: JSON.stringify({
-      query: `
-        mutation PushPayment{
-          insertIntopaymentsCollection(objects:{date: ${date}, phone: "${phone}", name:"${name}", total:${total}, address:"${shipping_details}", payment_id:"${id}"}){
-            records{
-              date,
-              phone,
-              name,
-              total,
-              address,
-              payment_id
-            }
-          }
-        }
-      `,
-    }),
+) => {
+  await supabase.from("payments").insert({
+    payment_id: id,
+    total,
+    date,
+    address: shipping_details,
+    phone,
+    name,
   });
+};
 export const getPaymentById = async (id: string) =>
-  await fetch(`${process.env.SUPABASE_URL}/graphql/v1`, {
-    method: "POST",
-    headers: {
-      apikey: `${process.env.SUPABASE_ANON_KEY}`,
-      authorization: `Bearer ${process.env.SUPABASE_ANON_KEY}`,
-    },
-    body: JSON.stringify({
-      query: `
-      query GetPaymentByID{
-        paymentsCollection(filter:{payment_id: {
-          eq:"${id}"
-        }}){
-          edges{
-            node{
-              phone,
-              name,
-              total,
-              address
-            }
-          }
-        }
-      }
-    `,
-    }),
-  });
+  await supabase.from("payments").select("*").eq("payment_id", id);

@@ -3,7 +3,6 @@ import { buffer } from "micro";
 import Stripe from "stripe";
 import Cors from "micro-cors";
 import { pushPayment } from "utils/fetch";
-import { PaymentRequestEvent } from "@stripe/stripe-js";
 
 const stripe = new Stripe(process.env.STRIPE_SK || "", {
   apiVersion: "2022-11-15",
@@ -34,16 +33,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         process.env.WH_SECRET || ""
       );
     } catch (error: any) {
+      console.log(error);
       res.status(400).send(`Webhook error: ${error}`);
     }
 
-    if (event.object.status === "succeeded") {
-      const id = event.object.id;
-      const name = event.object.shipping.name;
-      const phone = event.object.shipping.phone;
-      const total = parseInt(event.object.amount);
-      const { line1, line2, postal_code, state } =
-        event.object.charges.data[0].shipping.address;
+    if (event.type == "charge.succeeded") {
+      const object = event.data.object;
+      const id = object.payment_intent;
+      const name = object.shipping.name;
+      const phone = object.shipping.phone;
+      const total = parseInt(object.amount);
+      const { line1, line2, postal_code, state } = object.shipping.address;
       const shipping_details = `〒${postal_code} ${state} ${line1} ${line2}`;
 
       pushPayment(id, total, new Date(), shipping_details, name, phone)
@@ -51,6 +51,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           res.status(200).json({ data });
         })
         .catch(() => res.status(500).json({ message: "Server error" }));
+    } else {
+      res.status(400).json({ message: "Bad request" });
     }
   } else {
     res.status(400).json({ message: "Bad request" });
