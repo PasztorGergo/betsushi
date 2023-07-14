@@ -5,6 +5,7 @@ import { fadeIn } from "utils";
 import { Title } from "./Title";
 import { useCart } from "context/CartProvider";
 import { Product } from "models";
+import toast from "react-hot-toast";
 
 export const FoodCard = ({
   src,
@@ -20,7 +21,7 @@ export const FoodCard = ({
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }) => {
   const { setCart, meals } = useCart()!;
-  const localPrice = new Intl.NumberFormat("ja-JP", {
+  const formatPrice = new Intl.NumberFormat("ja-JP", {
     style: "currency",
     currency: "JPY",
   }).format(price);
@@ -36,20 +37,24 @@ export const FoodCard = ({
       <p
         onClick={() => {
           const meal = meals.find((x) => x.name === name);
-          setCart((prev) =>
-            prev.filter((x) => x.name === name).length === 0 && meal
-              ? ([
-                  {
-                    amount: 1,
-                    id: meal.id,
-                    img: meal.img,
-                    name,
-                    price: meal.price,
-                  },
-                  ...prev,
-                ] as Product[])
-              : prev
-          );
+          setCart((prev) => {
+            if (prev.filter((x) => x.name === name).length === 0 && meal) {
+              toast.success("Item added to your cart");
+              return [
+                {
+                  amount: 1,
+                  id: meal.id,
+                  img: meal.img,
+                  name,
+                  price: meal.price,
+                },
+                ...prev,
+              ] as Product[];
+            } else {
+              toast.error("Item is already in your cart");
+              return prev;
+            }
+          });
         }}
         className="text-white text-center rounded-[50%] absolute top-4 right-4 m-auto w-8 h-8 cursor-pointer opacity-100 bg-secondary text-xl hover:brightness-150 font-bold"
       >
@@ -59,7 +64,7 @@ export const FoodCard = ({
         {name}
       </Title>
       <Title level={3} className="text-white text-2xl">
-        {localPrice}
+        {formatPrice}
       </Title>
     </motion.div>
   );

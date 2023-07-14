@@ -6,6 +6,7 @@ import "../styles/global.css";
 import CartProvider from "context/CartProvider";
 import Loader from "./loading";
 import { AnimatePresence } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -16,6 +17,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <CartProvider>
         <body className="overflow-x-hidden">
+          <Toaster />
           <Navbar />
           <AnimatePresence>
             <Suspense fallback={<Loader />}>{children}</Suspense>
