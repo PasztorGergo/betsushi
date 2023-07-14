@@ -78,7 +78,7 @@ export const OrderForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/order-review",
+        return_url: "https://betsushi.vercel.app/order-review",
         receipt_email: email,
       },
     });

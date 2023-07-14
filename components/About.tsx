@@ -11,10 +11,8 @@ export const About = () => {
   const [width, setWidth] = useState<number>(0);
 
   useEffect(() => {
-    if (window) {
-      setWidth(window.innerWidth);
-    }
-  });
+    setWidth(window.innerWidth);
+  }, []);
 
   return (
     <section
