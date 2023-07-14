@@ -5,6 +5,7 @@ import React, { Suspense } from "react";
 import "../styles/global.css";
 import CartProvider from "context/CartProvider";
 import Loader from "./loading";
+import { AnimatePresence } from "framer-motion";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -16,7 +17,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <CartProvider>
         <body className="overflow-x-hidden">
           <Navbar />
-          <Suspense fallback={<Loader />}>{children}</Suspense>
+          <AnimatePresence>
+            <Suspense fallback={<Loader />}>{children}</Suspense>
+          </AnimatePresence>
           <Footer />
         </body>
       </CartProvider>
