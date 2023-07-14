@@ -1,13 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { fadeIn, staggerContainer } from "utils";
 import { Title } from "./Title";
 import styles from "../styles";
 import Image from "next/image";
 
 export const About = () => {
+  const [width, setWidth] = useState<number>(0);
+
+  useEffect(() => {
+    if (window) {
+      setWidth(window.innerWidth);
+    }
+  });
+
   return (
     <section
       id="about"
@@ -22,7 +30,7 @@ export const About = () => {
       <motion.div
         variants={staggerContainer()}
         whileInView="show"
-        initial={innerWidth > 768 ? "hidden" : "show"}
+        initial={width > 768 ? "hidden" : "show"}
         viewport={{ once: false, amount: 0.25 }}
         className="relative grid grid-cols-1 md:grid-cols-2 w-full"
       >
