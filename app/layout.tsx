@@ -17,7 +17,18 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <CartProvider>
         <body className="overflow-x-hidden">
-          <Toaster />
+          <Toaster
+            toastOptions={{
+              className: "",
+              style: {
+                background: "#F8EBD3",
+                color: "#186259",
+                borderRadius: "0.5rem",
+                padding: "0.5rem",
+                fontWeight: "bold",
+              },
+            }}
+          />
           <Navbar />
           <AnimatePresence>
             <Suspense fallback={<Loader />}>{children}</Suspense>

@@ -7,7 +7,6 @@ const CartContext = createContext<
       setCart: React.Dispatch<React.SetStateAction<Product[]>>;
       category: Category;
       setCategory: React.Dispatch<React.SetStateAction<Category>>;
-      meals: Array<Meals>;
     }
   | undefined
 >(undefined);
@@ -15,25 +14,6 @@ const CartContext = createContext<
 export const useCart = () => useContext(CartContext);
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const meals: Array<Meals> = useMemo(
-    (): Array<Meals> => [
-      {
-        id: "price_1NQsqhAlaM3JXMGCzVmQH2u0",
-        img: "/DailyOfferSushi.jpg",
-        name: "Zenbu Nigiri",
-        price: 959,
-        type: "nigiri",
-      },
-      {
-        id: "price_1NRCwrAlaM3JXMGCQkM5t7RQ",
-        img: "/kenbishi.png",
-        name: "Kenbishi Sake",
-        price: 529,
-        type: "drinks",
-      },
-    ],
-    []
-  );
   const [cart, setCart] = useState<Array<Product>>([]);
   const [category, setCategory] = useState<Category>("makis");
 
@@ -42,7 +22,6 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setCart,
     category,
     setCategory,
-    meals,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
