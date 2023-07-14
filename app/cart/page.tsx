@@ -9,10 +9,10 @@ const OrderPage = () => {
   const { cart } = useCart()!;
   return (
     <>
-      <main className="flex flex-col items-center gap-8">
+      <main className="flex flex-col items-center gap-4">
         <Cart />
         {cart.length > 0 && (
-          <Button className="self-end overflow-hidden">
+          <Button className="self-center overflow-hidden">
             <Link href="/checkout" className="w-full h-full">
               Checkout
             </Link>

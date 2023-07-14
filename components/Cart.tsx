@@ -20,7 +20,7 @@ export const Cart = () => {
       >
         &larr;Back to the menu
       </Link>
-      <div className="grid md:grid-cols-2 grid-cols-1 w-full gap-8">
+      <div className="grid md:grid-cols-2 grid-cols-1 w-full gap-8 h-[75vh] md:h-[50vh] overflow-y-scroll">
         {cart.length > 0 ? (
           cart.map((props) => <CartItem key={props.id} {...props} />)
         ) : (
@@ -33,6 +33,22 @@ export const Cart = () => {
           </>
         )}
       </div>
+      {cart.length > 0 && (
+        <div className="flex flex-col items-center justify-center gap-8">
+          <p className="text-xl font-bold text-primary text-center">
+            Pairs of chopsticks
+          </p>
+          <p className="text-sm text-primary text-center">
+            Up to 10 pairs it free, every additional pairs cost 25￥
+          </p>
+          <input
+            min={0}
+            defaultValue={1}
+            type="number"
+            className="border-2 border-secondary bg-background focus-within:bg-selected text-secondary rounded-lg p-2 outline-none"
+          />
+        </div>
+      )}
     </section>
   );
 };

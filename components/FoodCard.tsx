@@ -36,9 +36,28 @@ export const FoodCard = ({
     >
       <p
         onClick={() => {
-          const meal = meals.find((x) => x.name === name);
+          const meal = meals.find(
+            (x) => x.name.toLowerCase() === name.toLowerCase()
+          );
           setCart((prev) => {
-            if (prev.filter((x) => x.name === name).length === 0 && meal) {
+            console.table(meals);
+            if (prev.length === 0 && meal) {
+              toast.success("Item added to your cart");
+              return [
+                {
+                  amount: 1,
+                  id: meal.id,
+                  img: meal.img,
+                  name,
+                  price: meal.price,
+                },
+                ...prev,
+              ] as Product[];
+            } else if (
+              prev.filter((x) => x.name.toLowerCase() === name.toLowerCase())
+                .length === 0 &&
+              meal
+            ) {
               toast.success("Item added to your cart");
               return [
                 {

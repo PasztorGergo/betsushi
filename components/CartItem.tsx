@@ -36,7 +36,7 @@ export const CartItem = ({ ...props }: Product) => {
   }, [state]);
 
   return (
-    <Card className="p-4 w-full grid grid-rows-2 gap-8 grid-cols-[8rem_1fr] relative">
+    <Card className="p-4 w-full grid grid-rows-2 gap-8 grid-cols-[8rem_1fr] relative h-min">
       <Image
         className="col-start-1 row-span-2 row-start-1 place-self-center max-w-[8rem] max-h-32 object-contain"
         src={props.img}

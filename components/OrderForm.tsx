@@ -12,6 +12,7 @@ import {
   LinkAuthenticationElement,
 } from "@stripe/react-stripe-js";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 export const OrderForm = () => {
   const stripe = useStripe();
@@ -124,7 +125,15 @@ export const OrderForm = () => {
         />
         <Button id="submit" type="submit">
           {isLoading ? (
-            <div className="spinner" id="spinner"></div>
+            <div className="spinner" id="spinner">
+              <Image
+                className="animate-spin"
+                src="/Japanese_Imperial_Seal.svg"
+                alt="loader"
+                width={24}
+                height={24}
+              />
+            </div>
           ) : (
             <span id="button-text">Order</span>
           )}

@@ -43,6 +43,38 @@ export const getItemsByCategory = async (category: Category) =>
     }
   }
 `);
+
+export const getAllItems = async () =>
+  fetchAPI(
+    `
+    query GetAllItems {
+      posts {
+        nodes {
+          content
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          tags {
+            nodes {
+              name
+            }
+          }
+          title
+          categories {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+  );
+
 export const pushPayment = async (
   id: string,
   total: number,

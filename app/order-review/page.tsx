@@ -23,6 +23,7 @@ const OrderReview = () => {
     style: "currency",
   });
   const searchParams = useSearchParams();
+  console.log(cart);
 
   useEffect(() => {
     if (searchParams?.has("payment_intent")) {
@@ -31,7 +32,6 @@ const OrderReview = () => {
       })
         .then((x) => x.json())
         .then(({ data }) => {
-          console.log(data);
           const { name, total, address, phone } = data;
           setOrderData({
             total,
@@ -60,7 +60,7 @@ const OrderReview = () => {
         Order review
       </h3>
       <Card>
-        <ul className="grid grid-cols-[12rem_1fr] text-secondary grid-rows-5 group rounded-lg p-4 gap-2">
+        <ul className="grid grid-cols-[12rem_1fr] text-secondary grid-rows-4 group rounded-lg p-4 gap-2">
           <li className="bg-background font-bold col-start-1 row-start-1">
             Name
           </li>
@@ -71,9 +71,6 @@ const OrderReview = () => {
             Address
           </li>
           <li className="bg-background font-bold col-start-1 row-start-4">
-            Items
-          </li>
-          <li className="bg-background font-bold col-start-1 row-start-5">
             Total
           </li>
           <li className="bg-background  col-start-2 row-start-1">
@@ -86,9 +83,6 @@ const OrderReview = () => {
             {orderData?.address}
           </li>
           <li className="bg-background  col-start-2 row-start-4">
-            {orderData?.items}
-          </li>
-          <li className="bg-background  col-start-2 row-start-5">
             {formatter.format(orderData?.total || 0)}
           </li>
         </ul>
