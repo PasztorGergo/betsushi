@@ -37,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(400).send(`Webhook error: ${error}`);
     }
 
-    if (event.type == "charge.succeeded") {
+    if (event.type == "payment_intent.succeeded") {
       const object = event.data.object;
       const id = object.payment_intent;
       const name = object.shipping.name;
