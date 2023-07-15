@@ -52,11 +52,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         })
         .catch(() => res.status(500).json({ message: "Server error" }));
     } else {
-      res.status(400).json({ message: "Bad request" });
+      res.status(402).json({ message: "Unhandeled payment" });
     }
   } else {
-    res.status(400).json({ message: "Bad request" });
+    res.setHeader("Allow", "POST");
+    return res.status(405).end("Medthod not allowed!");
   }
 };
 
-export default handler;
+export default cors(handler as any);
