@@ -12,8 +12,32 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
       <head>
-        <title>A Culinary Journey to the Heart of Japan - Betsushi</title>
+        <title>Betsushi - A Culinary Journey to the Heart of Japan</title>
         <link rel="icon" href="/favicon.svg"></link>
+        <meta
+          property="description"
+          content="Nestled in the heart of Nagoya, our restaurant invites you on a gastronomic journey inspired by the rich traditions and artistry of Japan."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://betsushi.vercel.app" />
+        <meta
+          property="og:title"
+          content="Betsushi - A Culinary Journey to the Heart of Japan"
+        />
+        <meta
+          property="og:description"
+          content="Nestled in the heart of Nagoya, our restaurant invites you on a gastronomic journey inspired by the rich traditions and artistry of Japan."
+        />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://betsushi.vercel.app" />
+        <meta
+          property="twitter:title"
+          content="Betsushi - A Culinary Journey to the Heart of Japan"
+        />
+        <meta
+          property="twitter:description"
+          content="Nestled in the heart of Nagoya, our restaurant invites you on a gastronomic journey inspired by the rich traditions and artistry of Japan."
+        />
       </head>
       <CartProvider>
         <body className="overflow-x-hidden">
