@@ -81,7 +81,8 @@ export const pushPayment = async (
   date: Date,
   shipping_details: string,
   name: string,
-  phone: string
+  phone: string,
+  items: string
 ) => {
   await supabase.from("payments").insert({
     payment_id: id,
@@ -90,6 +91,7 @@ export const pushPayment = async (
     address: shipping_details,
     phone,
     name,
+    items,
   });
 };
 export const getPaymentById = async (id: string) =>

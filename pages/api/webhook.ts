@@ -39,14 +39,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (event.type == "payment_intent.succeeded") {
       const object = event.data.object;
-      const id = object.payment_intent;
+      const id = object.id;
+      const items = object.description;
       const name = object.shipping.name;
       const phone = object.shipping.phone;
       const total = parseInt(object.amount);
       const { line1, line2, postal_code, state } = object.shipping.address;
       const shipping_details = `〒${postal_code} ${state} ${line1} ${line2}`;
 
-      pushPayment(id, total, new Date(), shipping_details, name, phone)
+      pushPayment(id, total, new Date(), shipping_details, name, phone, items)
         .then((data) => {
           res.status(200).json({ data });
         })

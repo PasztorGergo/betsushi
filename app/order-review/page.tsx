@@ -23,7 +23,6 @@ const OrderReview = () => {
     style: "currency",
   });
   const searchParams = useSearchParams();
-  console.log(cart);
 
   useEffect(() => {
     if (searchParams?.has("payment_intent")) {
@@ -32,10 +31,10 @@ const OrderReview = () => {
       })
         .then((x) => x.json())
         .then(({ data }) => {
-          const { name, total, address, phone } = data;
+          const { name, total, address, phone, items } = data;
           setOrderData({
             total,
-            items: cart.map(({ name }) => name).join(", "),
+            items,
             address,
             name,
             phoneNumber: phone,
@@ -60,7 +59,7 @@ const OrderReview = () => {
         Order review
       </h3>
       <Card>
-        <ul className="grid grid-cols-[12rem_1fr] text-secondary grid-rows-4 group rounded-lg p-4 gap-2">
+        <ul className="grid grid-cols-[12rem_1fr] text-secondary grid-rows-5 group rounded-lg p-4 gap-2">
           <li className="bg-background font-bold col-start-1 row-start-1">
             Name
           </li>
@@ -73,6 +72,9 @@ const OrderReview = () => {
           <li className="bg-background font-bold col-start-1 row-start-4">
             Total
           </li>
+          <li className="bg-background font-bold col-start-1 row-start-5">
+            Items
+          </li>
           <li className="bg-background  col-start-2 row-start-1">
             {orderData?.name}
           </li>
@@ -84,6 +86,9 @@ const OrderReview = () => {
           </li>
           <li className="bg-background  col-start-2 row-start-4">
             {formatter.format(orderData?.total || 0)}
+          </li>
+          <li className="bg-background  col-start-2 row-start-5">
+            {orderData?.items}
           </li>
         </ul>
       </Card>

@@ -12,9 +12,16 @@ const calculateOrder = (items: Array<Product>) => {
   items.forEach(({ amount, price }) => (total += amount * price));
   return total;
 };
+const createDescription = (items: Array<Product>) => {
+  const itemsWithAmount: Array<string> = items.map(
+    ({ amount, name }) => `${name}(x${amount})`
+  );
+
+  return itemsWithAmount.join(", ");
+};
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { items, method } = req.body;
+  const { items } = req.body;
 
   if (req.method !== "POST") {
     return res.status(400).json({ error: "Bad request" });
@@ -22,8 +29,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const paymentIntent = await stripe.paymentIntents.create({
     currency: "jpy",
-    payment_method_types: [method],
+    payment_method_types: ["card"],
     amount: calculateOrder(items),
+    description: createDescription(items),
   });
 
   res.status(200).send({
