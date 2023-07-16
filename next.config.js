@@ -13,7 +13,7 @@ const nextConfig = {
     SUPABASE_URL: process.env.SUPABASE_URL,
   },
   images: {
-    domains: ["thispersondoesnotexist.com", "betsushi.000webhostapp.com"],
+    domains: ["betsushi.000webhostapp.com"],
   },
 };
 
