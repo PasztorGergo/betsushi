@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "utils";
@@ -14,7 +14,7 @@ export const RatingCard = () => {
       className="md:max-w-[30%] w-full gap-4 p-4 grid [grid-template-rows:4rem_1fr] [grid-template-columns:4rem_1fr] bg-white rounded-lg"
     >
       <Image
-        src="https://thispersondoesnotexist.com"
+        src="/blank-profile.webp"
         alt="someone"
         width={64}
         height={64}
