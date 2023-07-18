@@ -12,7 +12,7 @@ const OrderPage = () => {
       <main className="flex flex-col items-center gap-4">
         <Cart />
         {cart.length > 0 && (
-          <Button className="self-center overflow-hidden">
+          <Button role="checkout" className="self-center overflow-hidden">
             <Link href="/checkout" className="w-full h-full">
               Checkout
             </Link>

@@ -53,7 +53,7 @@ export const Navbar = () => {
         </ul>
         {url?.includes("/menu") || url?.includes("/cart") ? (
           <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
-            <Link href="/cart" className="w-full h-full">
+            <Link role="cart" href="/cart" className="w-full h-full">
               <RiShoppingCart2Line />
             </Link>{" "}
           </Card>
@@ -155,7 +155,7 @@ export const Navbar = () => {
           <li onClick={() => setIsOpen(false)}>
             {url?.includes("/menu") || url?.includes("/cart") ? (
               <Card className="p-4 text-[32px] text-secondary overflow-hidden hover:bg-selected transition-colors">
-                <Link href="/cart" className="w-full h-full">
+                <Link role="cart" href="/cart" className="w-full h-full">
                   <RiShoppingCart2Line />
                 </Link>{" "}
               </Card>

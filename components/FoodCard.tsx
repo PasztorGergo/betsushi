@@ -27,6 +27,7 @@ export const FoodCard = ({
   }).format(price);
   return (
     <motion.div
+      data-test-id={`${name.replace(" ", "-").toLowerCase()}-card`}
       onClick={(e) => onClick && onClick(e)}
       variants={fadeIn("left", 12, 60)}
       className={`relative overflow-hidden rounded-lg bg-center bg-contain bg-no-repeat p-4 flex justify-between items-end h-48 lg:h-64 w-72 lg:w-96 bg-black ${className}`}
@@ -35,6 +36,7 @@ export const FoodCard = ({
       }}
     >
       <p
+        data-test-id={`add-${name.replace(" ", "-").toLowerCase()}`}
         onClick={() => {
           const meal = meals.find(
             (x) => x.name.toLowerCase() === name.toLowerCase()

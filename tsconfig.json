@@ -31,7 +31,8 @@
     "**/*.ts",
     "**/*.tsx",
     "types.d.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "cypress/e2e/payment.cy.ts"
   ],
   "exclude": ["node_modules"]
 }

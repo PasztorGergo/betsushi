@@ -106,6 +106,7 @@ export const OrderForm = () => {
           onChange={(e) => {
             setEmail(e.value.email);
           }}
+          id="email"
         />
         <AddressElement
           options={{
@@ -116,6 +117,7 @@ export const OrderForm = () => {
           onChange={(e) => {
             setAddress(e.value);
           }}
+          id="adress"
         />
         <PaymentElement
           id="payment-element"
@@ -123,7 +125,7 @@ export const OrderForm = () => {
             layout: "tabs",
           }}
         />
-        <Button id="submit" type="submit">
+        <Button role="payment" id="submit" type="submit">
           {isLoading ? (
             <div className="spinner" id="spinner">
               <Image
